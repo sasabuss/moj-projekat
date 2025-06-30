@@ -21,7 +21,9 @@ Route::post("/admin/save-product",[ProductController::class,'saveProduct'])
     ->name("save-product");
 
 
-Route::get("/admin/all-products",[\App\Http\Controllers\ProductController::class,"index"]);
+Route::get("/admin/all-products",[\App\Http\Controllers\ProductController::class,"index"])
+   ->middleware("auth");
+
 
 Route::get("/admin/delete-product/{product}",[ProductController::class,"delete"])
     ->name("delete-product");
