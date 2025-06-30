@@ -49,39 +49,26 @@ class ProductController extends Controller
 
     }
 
-    public function edit($id)
+    public function edit(Request $request, ProductModel $product)
     {
-        $product = ProductModel::where(["id"=>$id])->first();
-        if($product == null)
-        {
-            die("Product Not Found");
-        }
         return view("edit-product",compact("product"));
 
     }
 
-    public function update(Request $request,$id)
+    public function update(Request $request,ProductModel $product)
     {
-        $request->validate([
-            "name"=>"required|string|unique:products",
-            "price"=>"required|numeric|min:1",
-            "description"=>"required|string",
-            "amount"=>"required|int|min:1",
-            "image"=>"required|string|",
-        ]);
 
-        ProductModel::where(["id"=>$id])->update
-        ([
-            "name"=>$request->get("name"),
-            "price"=>$request->get("price"),
-            "description"=>$request->get("description"),
-            "amount"=>$request->get("amount"),
-            "image"=>$request->get("image"),
-        ]);
+
+            $product->name = $request->get("name");
+            $product->price = $request->get("price");
+            $product->description = $request->get("description");
+            $product->amount = $request->get("amount");
+            $product->image = $request->get("image");
+            $product->save();
 
 
 
-        return redirect("/admin/all-products");
+            return redirect("/admin/all-products");
 
     }
 

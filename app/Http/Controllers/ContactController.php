@@ -49,4 +49,19 @@ class ContactController extends Controller
         return redirect()->back();
 
     }
+
+    public function edit(Request $request, ContactModel $contact)
+    {
+        return view('edit-contact',compact('contact'));
+    }
+
+
+    public function update(Request $request, ContactModel $contact)
+    {
+        $contact->email = $request->get('email');
+        $contact->subject = $request->get('subject');
+        $contact->message = $request->get('message');
+        $contact->save();
+        return redirect("/admin/all-contacts")->with("success", "Your message has been updated successfully!");
+    }
 }

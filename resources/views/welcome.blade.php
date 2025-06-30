@@ -1,7 +1,7 @@
 @extends("layout")
 
 @section('tittle')
-    Home
+    Dashboard
 @endsection
 
 @section('sadrzajStranice')
