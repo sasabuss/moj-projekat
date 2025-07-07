@@ -16,7 +16,7 @@ Route::get("/shop",[ShopController::class,'getAllProducts']);
 
 Route::post("/send-contact",[ContactController::class,'sendContact']);
 
-Route::middleware("auth")->prefix('admin')->group(function(){
+Route::middleware(['auth',\App\Http\Middleware\AdminCheckMiddleware::class])->prefix('admin')->group(function(){
 
     Route::view('/add-product', 'add-product');
 
